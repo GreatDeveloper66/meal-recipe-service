@@ -1,6 +1,5 @@
-import express from "express";
+import express, { Router } from "express";
 import cors from "cors";
-import OpenAI from "openai";
 import dotenv from "dotenv";
 import helmet from "helmet";
 
@@ -11,14 +10,22 @@ const app = express();
 app.use(helmet());
 
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN
-}
-app.use(cors(corsOptions));
+  origin: process.env.CORS_ORIGIN,
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const router = Router();
+router.get("/health", (_req, res) => res.json({ status: "ok" }));
+app.use("/api", router);
 
-app.get("/health", (_req, res) => res.json({ status: "ok" }));
+const PORT = process.env.PORT || 3000;
+
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server running locally on http://localhost:${PORT}`);
+  });
+}
 
 export default app;
