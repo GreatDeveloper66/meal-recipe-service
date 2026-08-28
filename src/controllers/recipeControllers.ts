@@ -1,7 +1,5 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import { openai } from '@ai-sdk/openai';
-import { generateText } from 'ai';
 import OpenAI from 'openai';
 
 
@@ -57,7 +55,7 @@ export const getRecipe = async(req: any, res: any) => {
            "ingredients": ["List of ingredients"],
            "directions": ["List of directions"]
        }`
-       const prompt = `Generate a recipe for ${name} that uses the following ingredients: ${foodList}
+       const prompt = `Generate a recipe for ${name} that uses the following ingredients: ${foodList}.
        ${formatInstructions}`;
 
        const response = await openaiClient.chat.completions.create({
@@ -81,7 +79,6 @@ export const getRecipe = async(req: any, res: any) => {
         }
         res.status(200).json(recipeResponse);
        }
-       res.status(200).json(response);
 }
 
 
