@@ -34,7 +34,7 @@ interface RecipeRequest {
 }
 
 export const getRecipe = async(req: any, res: any) => {
-    if(req.method !== 'POST') {
+    if(req.method !== 'GET') {
         res.status(405).json({ error: 'Method not allowed' });
     }
     const recipeRequest = req.body as RecipeRequest;
