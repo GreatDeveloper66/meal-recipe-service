@@ -3,9 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
-    "dist/index.js": {
-      "runtime": "@vercel/node@3.0.0"
-    }
+    "dist/index.js": {}
   },
   "rewrites": [
     { "source": "/(.*)", "destination": "/dist/index" }
